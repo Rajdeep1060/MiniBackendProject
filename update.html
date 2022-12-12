@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background: linear-gradient(to right,grey,wheat);
+        }
+        div{
+            margin-left: 38%;
+            margin-top:8%;
+        }
+        div h2{
+            margin-left: 10%;
+            font-size: 30px;
+            text-decoration: underline;
+        }
+        form{
+            justify-content: center;
+        }
+        form input{
+            width:300px;
+            height: 50px;
+            border-radius: 30px;
+        }
+       form input[type=submit]{
+        margin-left: 10%;
+        width:120px;
+        background-color: black;
+        color:white;
+        cursor: pointer;
+       }
+    </style>
+</head>
+<body>
+    <div>
+    <h2>Update</h2>
+    <form action="/update" method="post">
+        <input type="text" name="uname" placeholder="   Enter Your Username" required><br><br>
+        <input type="password" name="upass" placeholder="   Enter Your password" required><br><br>
+        <input type="password" name="newpass" placeholder="   Enter New password" required><br><br>
+        <input type="password" name="newpass1" placeholder="   Enter new password again" required><br><br>
+        <input type="submit">
+    </form>
+    </div>
+</body>
+</html>

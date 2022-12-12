@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        ul{
+          color:white;
+            border:2px solid black;
+            width:400px;
+            border-radius: 10px;
+        }
+        ul li{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <% for(var i=0;i<result.length;i++){ %>
+            <ul>
+            <li>First name:- <%= result[i].firstname %> </li>
+            <li>Last name:- <%=result[i].lastname%></li>
+            <li>Course:-<%=result[i].course%></li>
+            <li>Gender:- <%=result[i].gender%></li>
+            <li>Phone Number:- <%=result[i].phone%></li>
+            </ul>
+            <br>
+            <% } %>
+        </div>
+</body>
+</html>
