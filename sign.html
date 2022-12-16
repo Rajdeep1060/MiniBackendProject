@@ -6,6 +6,7 @@
 	<meta name="viewport"
 		content="width=device-width,
 						initial-scale=1.0">
+						<title>Home page</title>
 	<style>
 		@import url(
 "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -313,7 +314,7 @@ header {
 		<div class="form-section">
 
 			<!-- login form -->
-			<form action="/dashboard" method="post">
+			<form action="/login" method="post">
 			<div class="login-box">
 				<input type="text"
 					class="email ele"
@@ -341,10 +342,10 @@ header {
 				<input type="radio" name="gender" value="male"required>male
 				<input type="radio" name="gender" value="female" required>female
 				</div>
-				<input type="text" name="phone" maxlength="10" class="name ele" placeholder="Enter Your Phone Number">
+				<input type="text" name="phone" maxlength="10" class="name ele" placeholder="Enter Your Phone Number" required>
 				<input type="password"
 					name="password" class="password ele"
-					placeholder="password" required>
+					placeholder="password" required minlength="8">
 				<input type="submit" class="clkbtn"></input>
 				</form>
 			</div>
