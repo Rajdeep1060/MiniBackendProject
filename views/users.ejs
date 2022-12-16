@@ -23,12 +23,14 @@
 <body>
     <div>
         <% for(var i=0;i<result.length;i++){ %>
+            if(<%=result[i].username%> != <%="admin"%>){
             <ul>
-            <li>First name:- <%= result[i].firstname %> </li>
-            <li>Last name:- <%=result[i].lastname%></li>
+            <li>First name:- <%= result[i].fname %> </li>
+            <li>Last name:- <%=result[i].lname%></li>
             <li>Course:-<%=result[i].course%></li>
             <li>Gender:- <%=result[i].gender%></li>
             <li>Phone Number:- <%=result[i].phone%></li>
+            <li>To delete this user Click here:- <a href="/delete?id=<%= result[i].id %>">Delete</a></li>
             </ul>
             <br>
             <% } %>
