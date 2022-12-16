@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        div{
+            margin-top:10%;
+            margin-left: 38%;
+        }
+        button{
+           background-color:black;
+            color:white;
+            width: 100px;
+            height: 40px;
+            border-radius: 10px;
+            margin-left: 3%;
+        }
+        ul{
+            list-style-type:square;
+            display: none;
+            border: 2px solid black;
+            background-color: rgb(58, 255, 212);
+            color:black;
+            width: 200px;
+            border-radius: 10px;
+        }
+        button,a{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <button>View profile</button>
+    <ul>
+        <li>first name :-<%=result[0].fname%></li>
+        <li>last name:-<%=result[0].lname%></li>
+        <li>course:-<%=result[0].course%></li>
+        <li>phone :-<%=result[0].phone%></li>
+    </ul>
+    <br>
+    <a href="/">Click here to go to home page</a>
+    <br>
+    <br>
+    <a href="/up">Click here to update your password</a>
+    </div>
+    <script>
+       $(document).ready(()=>{
+        $("button").click(()=>{
+            $("ul").toggle(930);
+        })
+       }
+       )
+    </script>
+</body>
+</html>
