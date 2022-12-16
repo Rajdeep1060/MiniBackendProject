@@ -24,7 +24,7 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root", // my username
     password: "", // my password
-    database: "myform"
+    database: "users"
 });
 
 app.get('/', (req, res) => {
@@ -45,7 +45,7 @@ app.post('/register', (req, res) => {
             console.log(err);
         };
         // checking user already registered or no
-        con.query(`SELECT * FROM users WHERE username = '${userName}'`, function(err, result){
+        con.query(`SELECT * FROM user WHERE username = '${userName}'`, function(err, result){
             if(err){
                 console.log(err);
             };
@@ -74,15 +74,15 @@ app.post('/register', (req, res) => {
                 </head>
                 <body>
                     <div class="container">
-                        <h3>Hi, ${req.session.user.firstname} ${req.session.user.lastname}</h3>
-                        <a href="/">Log out</a>
+                        <h3>Hi, ${firstName} ${lastName} Your are registered</h3>
+                        <a href="/">Click here to go to home page</a>
                     </div>
                 </body>
                 </html>
                 `);
             }
                 // inserting new user data
-                var sql = `INSERT INTO users (firstname, lastname, username,course, gender , phone , password) VALUES ('${firstName}', '${lastName}', '${userName}', '${Course}','${gender}','${phone}','${password}')`;
+                var sql = `INSERT INTO user (fname, lname, username,course, gender , phone , password) VALUES ('${firstName}', '${lastName}', '${userName}', '${Course}','${gender}','${phone}','${password}')`;
                 con.query(sql, function (err, result) {
                     if (err){
                         console.log(err);
@@ -100,14 +100,16 @@ app.post('/register', (req, res) => {
 
 });
 
-app.post("/dashboard", (req, res)=>{
+app.post("/login", (req, res)=>{
     var userName = req.body.userName;
-    var password = req.body.password;
+    var Password = req.body.password;
+    console.log(userName);
+    console.log(Password);
     con.connect(function(err) {
         if(err){
             console.log(err);
         };
-        con.query(`SELECT * FROM users WHERE username = '${userName}' AND password = '${password}'`, function (err, result) {
+        con.query(`SELECT * FROM user WHERE username = '${userName}' AND password = '${Password}'`, function (err, result) {
           if(err){
             console.log(err);
           };
@@ -115,9 +117,9 @@ app.post("/dashboard", (req, res)=>{
           function userPage(){
             // We create a session for the dashboard (user page) page and save the user data to this session:
             req.session.user = {
-                firstname: result[0].firstname,
-                lastname: result[0].lastname,
-                username: result[0].userName,
+                firstname: result[0].fname,
+                lastname: result[0].lname,
+                username: result[0].username,
                 course:result[0].Course,
                gender:result[0].gender,
                phone:result[0].phone,
@@ -125,23 +127,7 @@ app.post("/dashboard", (req, res)=>{
             };
             var name="admin";
             if (`${userName}`!=`${name}`) {
-            res.send(`
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1">
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-            </head>
-            <body>
-                <div class="container">
-                    <h3>Hi, ${req.session.user.firstname} ${req.session.user.lastname}</h3>
-                    <a href="/">Log out</a> <br>
-                    <a href="/up">Click here to change password</a?
-                </div>
-            </body>
-            </html>
-            `);
+            res.render("viewprofile.ejs",{result:result});
             }
             else{
                 res.sendFile(__dirname+'/showuser.html');
@@ -161,7 +147,7 @@ app.get("/up",(req,res)=>{
     res.sendFile(__dirname+'/update.html');
 })
 app.get("/users", (req,res)=> {
-    con.query('SELECT * FROM users', function (err, result) {
+    con.query('SELECT * FROM user', function (err, result) {
       if (err) throw err;
       ///res.render() function
       console.log(result);
@@ -200,7 +186,7 @@ app.post("/update",function(request,res){
     con.connect(function(errror)
     {
 
-        con.query(`update users set password='${newpass}' WHERE username = '${uname}' AND password = '${upass}'`,function(err,result)
+        con.query(`update user set password='${newpass}' WHERE username = '${uname}' AND password = '${upass}'`,function(err,result)
         {
             if(err){
                 console.log(err);
@@ -214,6 +200,18 @@ app.post("/update",function(request,res){
     })
 }
 })
+app.get("/delete",function(request,response){
+    con.connect(function(errror)
+    {
+        var sql="delete from user where id=?";
+        con.query(sql,[request.query.id],function(errror,result)
+        {
+            if(errror) throw errror;
+            console.log(result);
+            response.redirect("users");
+        })
+    })
+})
 app.listen(3000, ()=>{
-    console.log("Server running on http://localhost:5000");
+    console.log("Server running on http://localhost:3000");
 });
